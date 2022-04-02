@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { Header } from './Header';
-import { KeyBoard } from './KeyBoard';
+import React, { useState } from 'react';
+
+import { Header } from './components/Header';
+import { Board } from './components/Board';
+import { KeyBoard } from './components/KeyBoard';
 
 const App = () => {
-  let [count, setCount] = useState(0);
+	const [key, setKey] = useState('');
 
-  useEffect(() => {
-    setCount(9);
-  }, []);
-  
-  return (
-    <>
-      <Header />
-      <div>{count}</div>
-      <KeyBoard />
-    </>
-  );
+	return (
+		<div style={container}>
+			<Header />
+			<Board />
+			<KeyBoard />
+		</div>
+	);
 }
+
+const container = {
+	height: '100%',
+	width: '100%'
+};
 
 export default App;
