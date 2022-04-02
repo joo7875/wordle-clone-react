@@ -1,40 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { Square } from './Square';
+
 export const Board = () => {
+
+    const createSquare = () => {
+        let board = [];
+        for (let i = 0; i < 6; i++) {
+            for (let j = 0; j < 5; j++) {
+                board.push(<Square key={`${i}${j}`} order={i + 1} index={j} />);
+            }
+        }
+        return board;
+    }
 
     return (
         <BoardContainer id='board-container'>
-            <div className='square' id='1'></div>
-            <div className='square' id='2'></div>
-            <div className='square' id='3'></div>
-            <div className='square' id='4'></div>
-            <div className='square' id='5'></div>
-            <div className='square' id='6'></div>
-            <div className='square' id='7'></div>
-            <div className='square' id='8'></div>
-            <div className='square' id='9'></div>
-            <div className='square' id='10'></div>
-            <div className='square' id='11'></div>
-            <div className='square' id='12'></div>
-            <div className='square' id='13'></div>
-            <div className='square' id='14'></div>
-            <div className='square' id='15'></div>
-            <div className='square' id='16'></div>
-            <div className='square' id='17'></div>
-            <div className='square' id='18'></div>
-            <div className='square' id='19'></div>
-            <div className='square' id='20'></div>
-            <div className='square' id='21'></div>
-            <div className='square' id='22'></div>
-            <div className='square' id='23'></div>
-            <div className='square' id='24'></div>
-            <div className='square' id='25'></div>
-            <div className='square' id='26'></div>
-            <div className='square' id='27'></div>
-            <div className='square' id='28'></div>
-            <div className='square' id='29'></div>
-            <div className='square' id='30'></div>
+            {createSquare()}
         </BoardContainer>
     );
 }
@@ -54,7 +37,7 @@ const BoardContainer = styled.div`
         font-weight: bold;
 
         display: flex;
-        justicfy-content: center;
+        justify-content: center;
         align-items: center;
     }
 `;

@@ -1,44 +1,47 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { Button } from './Button';
+
 export const KeyBoard = () => {
+
     return (
         <>
             <Row>
-                <button id='q'>q</button>
-                <button id='w'>w</button>
-                <button id='e'>e</button>
-                <button id='r'>r</button>
-                <button id='t'>t</button>
-                <button id='y'>y</button>
-                <button id='u'>u</button>
-                <button id='i'>i</button>
-                <button id='o'>o</button>
-                <button id='p'>p</button>
+                <Button index='q' />
+                <Button index='w' />
+                <Button index='e' />
+                <Button index='r' />
+                <Button index='t' />
+                <Button index='y' />
+                <Button index='u' />
+                <Button index='i' />
+                <Button index='o' />
+                <Button index='p' />
             </Row>
             <Row>
                 <div id='space-half'></div>
-                <button id='a'>a</button>
-                <button id='s'>s</button>
-                <button id='d'>d</button>
-                <button id='f'>f</button>
-                <button id='g'>g</button>
-                <button id='h'>h</button>
-                <button id='j'>j</button>
-                <button id='k'>k</button>
-                <button id='l'>l</button>
+                <Button index='a' />
+                <Button index='s' />
+                <Button index='d' />
+                <Button index='f' />
+                <Button index='g' />
+                <Button index='h' />
+                <Button index='j' />
+                <Button index='k' />
+                <Button index='l' />
                 <div id='space-half'></div>
             </Row>
             <Row>
-                <button id='enter'>Enter</button>
-                <button id='z'>z</button>
-                <button id='x'>x</button>
-                <button id='c'>c</button>
-                <button id='v'>v</button>
-                <button id='b'>b</button>
-                <button id='n'>n</button>
-                <button id='m'>m</button>
-                <button id='del'>Del</button>
+                <Button index='enter' />
+                <Button index='z' />
+                <Button index='x' />
+                <Button index='c' />
+                <Button index='v' />
+                <Button index='b' />
+                <Button index='n' />
+                <Button index='m' />
+                <Button index='del' />
             </Row>
         </>
     );
@@ -50,20 +53,6 @@ const Row = styled.div`
     margin: 0 auto 8px;
     touch-action: manipulation;
     width: 100%;
-
-    button {
-        background-color: lightgray;
-        border: 0;
-        padding: 0;
-        cursor: pointer;
-        font-weight: bold;
-        user-select: none;
-        text-transform: uppercase;
-        height: 58px;
-        flex-grow: 1;
-        margin-right: 6px;
-        border-radius: 4px;
-    }
 
     #space-half {
         flex-grow: 0.5;
