@@ -2,6 +2,31 @@
 
 https://joo7875.github.io/wordle-clone-react/
 
+# How to deploy a demo with Github pages
+
+```
+npm install --save gh-pages
+```
+
+In package.json,
+
+```
+  "homepage": "https://joo7875.github.io/wordle-clone-react/", // add homepage
+  "name": "wordle-clone-react",
+  "version": "0.1.0",
+  "private": true,
+```
+
+```
+  // add these under "scripts"
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build"
+```
+
+```
+  npm run deploy
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
