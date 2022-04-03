@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addLetter, deleteLetter, updateRowNum } from '../redux/actions';
-import { COLS, ROWS, GREEN } from '../redux/constants';
+import { COLS, ROWS, GREEN, WHITE } from '../redux/constants';
 import { GetCurrentRow } from '../utils/GetCurrentRow';
 import { getColor } from '../utils/getColor';
 
@@ -39,6 +39,7 @@ export const Button = ({ index }) => {
 
                     btn.style.backgroundColor = color;
                     btn.style.borderColor = color;
+                    btn.style.color = WHITE;
                 }
             }
             else if (index === 'del') {

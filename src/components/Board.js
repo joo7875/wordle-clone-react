@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import 'animate.css';
 
 import { Square } from './Square';
-import { COLS, ROWS, GREEN } from '../redux/constants';
+import { COLS, ROWS, GREEN, WHITE } from '../redux/constants';
 import { getColor } from '../utils/getColor';
 import { addLetter, deleteLetter, updateRowNum } from '../redux/actions';
 import { GetCurrentRow } from '../utils/GetCurrentRow';
@@ -40,7 +40,7 @@ export const Board = () => {
                     const color = getColor(i, letter, answer);
         
                     sq.classList.add('animate__flipInX');
-                    sq.style = `background-color: ${color}; border-color: ${color}`;
+                    sq.style = `background-color: ${color}; border-color: ${color}; color: ${WHITE}`;
                 }, interval * i)
                 
             }
@@ -76,6 +76,7 @@ export const Board = () => {
 
                 btn.style.backgroundColor = color;
                 btn.style.borderColor = color;
+                btn.style.color = WHITE;
             }
         }
         else if (key === 'Backspace') {
@@ -113,7 +114,7 @@ const BoardContainer = styled.div`
         min-height: 60px;
         border: 2px solid gray;
         text-transform: uppercase;
-        font-size: 50px;
+        font-size: 40px;
         font-weight: bold;
 
         display: flex;

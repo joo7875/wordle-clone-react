@@ -8,3 +8,4 @@ export const ROWS = 6;
 export const GRAY = 'gray';
 export const YELLOW = 'rgb(181, 159, 59)';
 export const GREEN = 'rgb(83, 141, 78)';
+export const WHITE = 'white';
