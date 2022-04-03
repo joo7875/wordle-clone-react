@@ -1,15 +1,20 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import 'animate.css';
 
 import { Square } from './Square';
-import { COLS } from '../redux/constants';
+import { COLS, ROWS, GREEN } from '../redux/constants';
 import { getColor } from '../utils/getColor';
+import { addLetter, deleteLetter, updateRowNum } from '../redux/actions';
+import { GetCurrentRow } from '../utils/GetCurrentRow';
 
 export const Board = () => {
 
+    const dispatch = useDispatch();
     const { row_number, answer } = useSelector(state => state);
+    
+    const curRow = GetCurrentRow(row_number);
 
     const createSquare = () => {
         let board = [];
@@ -40,7 +45,54 @@ export const Board = () => {
                 
             }
         }
-    }, [row_number]);
+    }, [answer, row_number]);
+
+    const onKeyDown = useCallback(e => {
+        const key = e.key;
+        const code = e.keyCode;
+
+        const isAlphabet = code > 64 && code < 91;
+
+        if (key === 'Enter') {
+            if (curRow.length < COLS) {
+                window.alert('Not enough letters');
+                return;
+            }
+
+            dispatch(updateRowNum(row_number + 1));
+
+            if (curRow.join('') === answer) window.alert('Congratulations!');
+            if (row_number === ROWS) window.alert(`Sorry, you have no more guesses! The word is ${answer}.`);
+
+            // keyboard color
+            // curRow.length === COLS
+            for (let i = 0; i < COLS; i++) {
+                let btn = document.getElementById(curRow[i]);
+                let preColor = btn.style.backgroundColor;
+
+                if (preColor === GREEN) continue;
+
+                const color = getColor(i, curRow[i], answer);
+
+                btn.style.backgroundColor = color;
+                btn.style.borderColor = color;
+            }
+        }
+        else if (key === 'Backspace') {
+            if (curRow.length > 0) dispatch(deleteLetter());
+        }
+        else {
+            if (isAlphabet && curRow.length < COLS) dispatch(addLetter(key));
+        }
+        
+    }, [curRow, dispatch, row_number, answer]);
+
+    useEffect(() => {
+        if (row_number <= ROWS) {
+            document.addEventListener('keydown', onKeyDown);
+            return () => document.removeEventListener('keydown', onKeyDown);
+        }
+    }, [onKeyDown, curRow, row_number]);
 
     return (
         <BoardContainer id='board-container'>
