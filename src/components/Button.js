@@ -1,38 +1,52 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addLetter, deleteLetter } from '../redux/actions';
-import { COLS } from '../redux/constants';
+import { addLetter, deleteLetter, updateRowNum } from '../redux/actions';
+import { COLS, ROWS, GREEN } from '../redux/constants';
+import { GetCurrentRow } from '../utils/GetCurrentRow';
+import { getColor } from '../utils/getColor';
 
 export const Button = ({ index }) => {
 
     const dispatch = useDispatch();
-    const { row_number, row_1, row_2, row_3, row_4, row_5, row_6 } = useSelector(state => state);
+    const { row_number, answer } = useSelector(state => state);
 
-    let curRow;
-    switch (row_number) {
-        case 1: curRow = row_1; break;
-        case 2: curRow = row_2; break;
-        case 3: curRow = row_3; break;
-        case 4: curRow = row_4; break;
-        case 5: curRow = row_5; break;
-        case 6: curRow = row_6; break;
-        default: break;
-    }
+    let curRow = GetCurrentRow(row_number);
 
     const onKeyClick = () => {
-        if (index === 'enter') {
-            if (curRow.length < COLS) {
-                window.alert('Not enough letters');
-                return;
+
+        if (row_number <= ROWS) {
+            if (index === 'enter') {
+                if (curRow.length < COLS) {
+                    window.alert('Not enough letters');
+                    return;
+                }
+
+                dispatch(updateRowNum(row_number + 1));
+                
+                if (curRow.join('') === answer) window.alert('Congratulations!');
+                if (row_number === ROWS) window.alert(`Sorry, you have no more guesses! The word is ${answer}.`);
+
+                // keyboard color
+                // curRow.length === COLS
+                for (let i = 0; i < COLS; i++) {
+                    let btn = document.getElementById(curRow[i]);
+                    let preColor = btn.style.backgroundColor;
+
+                    if (preColor === GREEN) continue;
+
+                    const color = getColor(i, curRow[i], answer);
+
+                    btn.style.backgroundColor = color;
+                    btn.style.borderColor = color;
+                }
             }
-            console.log(row_number, curRow)
-        }
-        else if (index === 'del') {
-            if (curRow.length > 0) dispatch(deleteLetter());
-        }
-        else {
-            if (curRow.length < COLS) dispatch(addLetter(index));
+            else if (index === 'del') {
+                if (curRow.length > 0) dispatch(deleteLetter());
+            }
+            else {
+                if (curRow.length < COLS) dispatch(addLetter(index));
+            }
         }
     }
 

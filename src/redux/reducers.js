@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { COLS, ADD_LETTER, DELETE_LETTER, UPDATE_ROW_NUM } from './constants';
+import { ADD_LETTER, DELETE_LETTER, UPDATE_ROW_NUM } from './constants';
 
 const initialState = {
     row_number: 1,

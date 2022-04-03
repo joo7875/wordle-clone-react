@@ -21,7 +21,8 @@ const container = {
 	display: 'flex',
 	flexDirection: 'column',
 	height: '100%',
-	alignItems: 'center'
+	alignItems: 'center',
+	fontFamily: '"Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif'
 };
 
 const sub_container = {
